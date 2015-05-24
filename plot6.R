@@ -4,10 +4,10 @@ NEI$fipsfact <- factor(as.numeric(NEI$fips))
 NEI$sccfact <- factor(NEI$SCC)
 NEI$typefact <- factor(NEI$type)
 NEI$yearfact <- factor(NEI$year)
-balt <- NEI[NEI$fips=="24510",]
-la <- NEI[NEI$fips=="06037",]
 SCC <- readRDS("Source_Classification_Code.rds")
 SCC[grep("mobile", SCC[,4], ignore.case = TRUE),4]
+balt <- NEI[NEI$fips=="24510",]
+la <- NEI[NEI$fips=="06037",]
 motorname <- levels(factor(SCC[grep("mobile", SCC[,4], ignore.case = TRUE),4]))
 motor <- motorname[grep("mobile",motorname,ignore.case = TRUE)]
 
@@ -42,7 +42,5 @@ cf <- rbind(cf, lf)
 cf$year <- factor(cf$year)
 w <- ggplot(data=cf, aes(x = year, y = motor, color, fill=year))
 w + geom_bar(stat="identity") + facet_wrap( ~ region, scales="free")
-ggsave("plot6.png")
-
-
+ggsave("plot6.png", width=6, height=4, dpi=100)
 
